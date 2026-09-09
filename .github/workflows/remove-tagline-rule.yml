@@ -1,0 +1,40 @@
+name: Remove homepage tagline rule
+
+on:
+  push:
+    paths:
+      - .github/workflows/remove-tagline-rule.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Simplify tagline styling
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          css = Path('assets/styles.css')
+          s = css.read_text()
+          old = """.identity-line em {\n  display: block;\n  margin-top: .5em;\n  padding: 2px 0 2px 18px;\n  border-left: 4px solid #d8d4ce;\n  font-size: .96em;\n  line-height: 1.35;\n  font-weight: 500;\n  letter-spacing: .005em;\n}"""
+          new = """.identity-line em {\n  display: block;\n  margin-top: .5em;\n  font-size: .96em;\n  line-height: 1.35;\n  font-weight: 500;\n  letter-spacing: .005em;\n}"""
+          if old not in s:
+              raise SystemExit('Expected tagline CSS not found')
+          css.write_text(s.replace(old, new, 1))
+
+          index = Path('index.html')
+          h = index.read_text()
+          import re
+          h = re.sub(r'href="assets/styles\.css(?:\?v=[^"]*)?"', 'href="assets/styles.css?v=20260908-3"', h, count=1)
+          index.write_text(h)
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/styles.css index.html
+          git commit -m "Remove homepage tagline rule"
+          git push
