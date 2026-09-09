@@ -87,13 +87,16 @@ a:hover, a:focus { color: var(--blue); text-decoration: none; }
 .current-role { margin-top: 18px; line-height: 1.5; }
 .current-role strong { font-weight: 700; }
 
-.bio-layout {
-  display: grid;
-  grid-template-columns: 220px minmax(0,1fr);
-  gap: 26px;
-  align-items: start;
+.bio-layout { display: block; }
+.bio-layout::after { content: ''; display: block; clear: both; }
+.headshot {
+  float: left;
+  width: 220px;
+  max-width: 220px;
+  height: auto;
+  display: block;
+  margin: 0 26px 14px 0;
 }
-.headshot { width: 100%; max-width: 220px; height: auto; display: block; }
 .bio p { margin: 0 0 1.55em; }
 .bio p:last-child { margin-bottom: 0; }
 
@@ -215,8 +218,7 @@ a:hover, a:focus { color: var(--blue); text-decoration: none; }
   .section { padding: 28px 22px; }
   .section.dark { padding: 26px 18px; }
   .identity-line { font-size: 1.28rem; }
-  .bio-layout { grid-template-columns: 1fr; }
-  .headshot { max-width: 180px; margin: 0 20px 6px 0; }
+  .headshot { width: 42%; max-width: 150px; margin: 0 18px 8px 0; }
   .report-gallery { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
   .report-card img { max-height: 220px; }
   .site-footer { padding: 22px; }
