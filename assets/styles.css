@@ -85,13 +85,13 @@ a:hover, a:focus { color: var(--blue); text-decoration: none; }
 }
 .identity-line em {
   display: block;
-  margin-top: .48em;
-  padding-left: 16px;
-  border-left: 3px solid rgba(63,100,145,.32);
-  font-size: .92em;
+  margin-top: .5em;
+  padding: 2px 0 2px 18px;
+  border-left: 4px solid #d8d4ce;
+  font-size: .96em;
   line-height: 1.35;
   font-weight: 500;
-  letter-spacing: .01em;
+  letter-spacing: .005em;
 }
 .current-role { margin-top: 18px; line-height: 1.5; }
 .current-role strong { font-weight: 700; }
