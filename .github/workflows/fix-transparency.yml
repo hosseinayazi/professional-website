@@ -1,0 +1,26 @@
+name: Fix portrait transparency
+
+on:
+  push:
+    paths:
+      - .github/workflows/fix-transparency.yml
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore original transparent portrait
+        run: |
+          curl -fL "https://hosseinayazi.weebly.com/uploads/1/2/2/2/122258592/hossein-058_orig.png" -o assets/images/hossein-ayazi.png
+          sed -i 's#assets/images/hossein-ayazi.webp#assets/images/hossein-ayazi.png#g' index.html
+      - name: Commit repaired portrait
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/images/hossein-ayazi.png index.html
+          git commit -m "Restore portrait transparency"
+          git push
