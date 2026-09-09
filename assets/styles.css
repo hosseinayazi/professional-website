@@ -86,8 +86,6 @@ a:hover, a:focus { color: var(--blue); text-decoration: none; }
 .identity-line em {
   display: block;
   margin-top: .5em;
-  padding: 2px 0 2px 18px;
-  border-left: 4px solid #d8d4ce;
   font-size: .96em;
   line-height: 1.35;
   font-weight: 500;
